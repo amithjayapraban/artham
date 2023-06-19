@@ -1,0 +1,31 @@
+input {
+  outline: none;
+  background-color: var(--gray) !important;
+}
+
+progress {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+::-webkit-progress-bar {
+  background-color: lightgray;
+  border-radius: 5px;
+  height: 2px;
+}
+::-moz-progress-bar {
+  background-color: lightgray;
+  border-radius: 5px;
+  height: 2px;
+}
+
+::-webkit-progress-value {
+  background-color: #00FFA3;
+  border-radius: 5px;
+}
+
+::-moz-progress-value {
+  background-color: #00FFA3;
+  border-radius: 5px;
+}
