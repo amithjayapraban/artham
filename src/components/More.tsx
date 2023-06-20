@@ -6,11 +6,13 @@ type More = {
 export default function More({ downloading, dbPercent, downloadDb }: More) {
   // dbPercent = 100;
   return (
-    <div className="more  bg-bg  border border-gray  p-8    rounded-xl break-words md:max-w-[40vw] max-w-[80vw] md:right-[5.8rem] right-[.7rem] md:top-[1.9rem] top-[.65rem] absolute z-[99]">
+    <div className="more more1  bg-bg  border border-gray  p-8  rounded-md break-words md:max-w-[40vw] max-w-[80vw] md:right-[6.1rem] right-[1.2rem] md:top-[2.2rem] top-[1.1rem] absolute z-[99]">
       <div
         className="flex cursor-pointer absolute top-2 w-4 h-4 justify-center items-center p-0 bg-red-600 rounded-full right-2 z-[999]]  "
         onClick={() => {
           document.querySelector(".more")?.classList.add("hidden");
+            document.querySelector(".section1")?.classList.remove("overlay");
+            document.querySelector(".section2")?.classList.remove("overlay");
           localStorage.setItem("more", "");
         }}
       ></div>

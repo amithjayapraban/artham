@@ -1,10 +1,3 @@
-// import Dexie from "dexie";
-
-// export const db = new Dexie("myDB");
-// db.version(1).stores({
-//   dictionary: "++id,eng,mal", // Primary key and indexed props
-// });
-
 import Dexie, { Table } from "dexie";
 
 export interface Dictionary {
@@ -16,7 +9,6 @@ export interface Dictionary {
 
 export class MySubClassedDexie extends Dexie {
   dictionary!: Table<Dictionary>;
-
   constructor() {
     super("myDatabase");
     this.version(1).stores({

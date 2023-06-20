@@ -1,15 +1,17 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { db } from "./db";
 import { SearchResult } from "./types/SearchResult";
 import { supabase } from "./supbase";
 import "./App.css";
 import More from "./components/More";
+import Head from "./components/Head";
 
 function App() {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
   const [dbPercent, setDbPercent] = useState(0);
   const [downloading, setDownloading] = useState(false);
+  const inputRef = useRef<HTMLInputElement | null>(null);
   let rows = 217563;
   let [s, e] = [0, 999];
 
@@ -18,10 +20,25 @@ function App() {
     se ? ([s, e] = JSON.parse(se)) : null;
   }
 
+  let synth;
+  const speak = (text: string) => {
+    synth = window.speechSynthesis;
+    const u = new SpeechSynthesisUtterance(text);
+    let voice = synth.getVoices();
+    u.voice = voice[52];
+    u.rate = 0.81;
+    synth.speak(u);
+  };
+
   useEffect(() => {
+    synth = window.speechSynthesis;
     let more = localStorage.getItem("more");
     more != null && document.querySelector(".more")?.classList.add("hidden");
-    // e <= rows && downloadDb();
+    if (more === null) {
+      document.querySelector(".section1")?.classList.add("overlay");
+      document.querySelector(".section2")?.classList.add("overlay");
+    }
+    inputRef.current && inputRef.current.focus();
     setDbPercent(Math.floor((e / rows) * 100));
   }, []);
 
@@ -116,48 +133,30 @@ function App() {
   };
 
   return (
-    <div className="h-[100dvh] overflow-h idden   grid gap-2 grid-rows-[.5fr,2fr]">
-      <section className="w-full  flex items-center  md:pt-8  pt-4 pb-4 px-4 md:px-24 justify-between">
-        <img src="/logo.svg" className="aspect-square md:w-8  w-6 " alt="" />
-
-        {/* <p className="italic font-extrabold md:text-xl font-mono">Artham</p> */}
-        <button
-          onClick={() =>
-            document.querySelector(".more")?.classList.remove("hidden")
-          }
-          className="bg-gray text-white aspect-square rounded-md md:w-8  w-6 "
-        >
-          ?
-        </button>
-      </section>
+    <div className="h-[100dvh] App  overflow-h idden   grid gap-2 grid-rows-[.5fr,auto]">
+      <Head />
       <More
         downloadDb={downloadDb}
         downloading={downloading}
         dbPercent={dbPercent}
       />
-      {/* <div className="absolute hidd en flex flex-col items-start gap-2 bottom-2 right-4 rounded-xl">
-        <label className="text-[.6rem]" htmlFor="file">
-          {downloading ? "Downloading" : "Downloaded"}
-          &nbsp; {dbPercent}%
-        </label>
-        <progress className="" id="file" value={dbPercent} max="100"></progress>
-        <button
-          className={`disabled:opacity-70 rounded border px-2 py-1`}
-          disabled={downloading}
-          onClick={downloadDb}
-        >
-          {downloading ? "Downloading" : "Download"}
-        </button>
-      </div> */}
 
-      <section className=" w-full px-4 md:px-24 pb-8  grid gap-2  grid-rows-[.1fr,.1fr,2fr] md:grid-rows-[.1fr,2fr]  ">
-        <input
-          className="px-4 md:hidden md:justify-self-center justify-self-start  py-3  w-full md:w-[60%] rounded-md"
-          type="text"
-          value={searchTerm}
-          onChange={handleInputChange}
-          placeholder="Search..."
-        />
+      <section className=" w-full px-4 md:px-24 section2  grid gap-2  grid-rows-[.1fr,.1fr,2fr] md:grid-rows-[.1fr,2fr]  ">
+        <span className="md:hidden relative flex w-full justify-center">
+          <input
+            ref={inputRef}
+            className="px-6  pr-12 md:hidden md:justify-self-center justify-self-start  py-3  w-full md:w-[60%] rounded-md"
+            type="text"
+            value={searchTerm}
+            onChange={handleInputChange}
+            placeholder="Search..."
+          />
+          <img
+            className="absolute w-5 right-[6%] top-[.8rem]"
+            src="/search.svg"
+            alt="search"
+          />
+        </span>
         <h3
           className={`md:justify-self-center self-center mt-4 w-full md:w-[60%]   ${
             searchResults.length > 0 ? "opacity-1" : "opacity-0"
@@ -166,10 +165,11 @@ function App() {
           Search Results
         </h3>
 
-        <ul className="h-[70dvh]  w-full  flex flex-col gap-3 items-center overflow-y-auto ">
+        <ul className="h-[68dvh]  w-full  flex flex-col gap-3 items-center overflow-y-auto ">
           {searchResults.map((result, i) => (
             <li
-              className="bg-gray w-full md:w-[60%]   py-2 px-4 rounded-md"
+              onClick={() => speak(result.english_word)}
+              className=" cursor-pointer bg-gray w-full md:w-[60%]   py-2 px-4 rounded-md"
               key={i}
             >
               <p className="text-[.9rem]  opacity-80"> {result.english_word}</p>
@@ -177,13 +177,21 @@ function App() {
             </li>
           ))}
         </ul>
-        <input
-          className="px-4 md:flex hidden md:justify-self-center justify-self-start  py-3  w-full md:w-[60%] rounded-md"
-          type="text"
-          value={searchTerm}
-          onChange={handleInputChange}
-          placeholder="Search..."
-        />
+        <span className="relative md:flex hidden w-full justify-center">
+          <input
+            ref={inputRef}
+            className="px-6 pr-12 mb-8  w-full md:w-[60%]  md:justify-self-center justify-self-start  py-3   rounded-md"
+            type="text"
+            value={searchTerm}
+            onChange={handleInputChange}
+            placeholder="Search..."
+          />
+          <img
+            className="absolute w-5 right-[23%] top-[.85rem]"
+            src="/search.svg"
+            alt="search"
+          />
+        </span>
       </section>
     </div>
   );

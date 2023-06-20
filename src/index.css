@@ -5,7 +5,7 @@
   font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
   color-scheme: dark;
   --gray: #3b3b3b;
-  --color: rgba(255, 255, 255, 0.87);
+  --color: rgba(255, 255, 255, 1);
   --bg: #242424;
   color: var(--color);
   background-color: var(--bg);

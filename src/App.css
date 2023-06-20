@@ -3,6 +3,17 @@ input {
   background-color: var(--gray) !important;
 }
 
+.overlay {
+  filter: blur(2px);
+}
+.more {
+  filter: blur(0px) !important;
+}
+.section1,
+.section2 {
+  transition: filter 0.2s ease-in;
+}
+
 progress {
   appearance: none;
   -webkit-appearance: none;
@@ -21,11 +32,11 @@ progress {
 }
 
 ::-webkit-progress-value {
-  background-color: #00FFA3;
+  background-color: #00ffa3;
   border-radius: 5px;
 }
 
 ::-moz-progress-value {
-  background-color: #00FFA3;
+  background-color: #00ffa3;
   border-radius: 5px;
 }
