@@ -6,7 +6,7 @@
   color-scheme: dark;
   --gray: #3b3b3b;
   --color: rgba(255, 255, 255, 1);
-  --bg: #242424;
+  --bg: rgb(18,18,19);
   color: var(--color);
   background-color: var(--bg);
   font-synthesis: none;
