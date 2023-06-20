@@ -4,9 +4,9 @@
 :root {
   font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
   color-scheme: dark;
-  --gray: #3b3b3b;
+  --gray: #242424;
   --color: rgba(255, 255, 255, 1);
-  --bg: rgb(18,18,19);
+  --bg: rgb(18, 18, 19);
   color: var(--color);
   background-color: var(--bg);
   font-synthesis: none;

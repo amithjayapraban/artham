@@ -12,13 +12,13 @@ export default defineConfig({
         enabled: true,
       },
       base: "/",
-      includeAssets: ["logo.png","logo.svg","cross.svg","search.svg"],
+      includeAssets: ["logo.png", "logo.svg", "cross.svg", "search.svg"],
       manifest: {
         name: "Artham",
         short_name: "Artham",
 
         description: "English - Malayalam Dictionary",
-        theme_color: "#242424",
+        theme_color: "rgb(18,18,19)",
         icons: [
           {
             src: "logo.png",
