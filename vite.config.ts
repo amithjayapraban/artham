@@ -12,7 +12,7 @@ export default defineConfig({
         enabled: true,
       },
       base: "/",
-      includeAssets: ["logo.png",“logo.svg”, “cross.svg”, “search.svg”],
+      includeAssets: ["logo.png","logo.svg","cross.svg","search.svg"],
       manifest: {
         name: "Artham",
         short_name: "Artham",
