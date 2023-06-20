@@ -135,7 +135,7 @@ function App() {
   };
 
   return (
-    <div className="h-[100dvh] App relative overflow-x-hidden   grid gap-2 grid-rows-[.5fr,auto]">
+    <div className="h-[100dvh] App relative overflow-x-hidden items-start  grid gap-2 grid-rows-[.5fr,auto]">
       <Head />
       <More
         downloadDb={downloadDb}
@@ -143,7 +143,7 @@ function App() {
         dbPercent={dbPercent}
       />
 
-      <section className=" w-full px-4 md:px-24 section2  grid gap-2  grid-rows-[.1fr,.1fr,2fr] md:grid-rows-[.1fr,2fr]  ">
+      <section className=" w-full px-4 md:px-24 self-end section2  grid gap-2  grid-rows-[.1fr,.1fr,1fr] md:grid-rows-[.1fr,1fr,.1fr]  ">
         <span className="md:hidden relative flex w-full justify-center">
           <input
             ref={inputRef}
@@ -166,8 +166,8 @@ function App() {
         >
           Search Results
         </h3>
-
-        <ul className="h-[68dvh]  w-full  flex flex-col gap-3 items-center overflow-y-auto ">
+        {/* md:max-h-[68vh] h-[68dvh] */}
+        <ul className="w-full  md:max-h-[68vh] h-[68dvh]    flex flex-col gap-3 items-center overflow-y-auto ">
           {searchResults.map((result, i) => (
             <li
               onClick={() => speak(result.english_word)}

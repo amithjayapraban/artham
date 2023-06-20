@@ -2,6 +2,9 @@ input {
   outline: none;
   background-color: var(--gray) !important;
 }
+input:focus {
+  outline: none !important;
+}
 .overlay {
   filter: blur(1px);
   transition: filter 50ms ease-in-out;
