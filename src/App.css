@@ -2,22 +2,27 @@ input {
   outline: none;
   background-color: var(--gray) !important;
 }
-
 .overlay {
-  filter: blur(2px);
+  filter: blur(1px);
+  transition: filter 50ms ease-in-out;
 }
 .more {
   filter: blur(0px) !important;
+  transition: transform 50ms ease-in-out;
 }
-.section1,
-.section2 {
-  transition: filter 0.2s ease-in;
+.hide {
+  transform: translateX(100%) !important;
+  transition: transform 150ms ease-in-out;
 }
 
+.section1 {
+  transition: filter 200ms ease-in-out;
+}
 progress {
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
+  height: 2px;
 }
 
 ::-webkit-progress-bar {

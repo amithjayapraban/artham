@@ -31,15 +31,17 @@ function App() {
   };
 
   useEffect(() => {
+    let percentage = Math.floor((e / rows) * 100);
+    percentage !== 100 && downloadDb();
     synth = window.speechSynthesis;
     let more = localStorage.getItem("more");
-    more != null && document.querySelector(".more")?.classList.add("hidden");
+    more != null && document.querySelector(".more")?.classList.add("hide");
     if (more === null) {
       document.querySelector(".section1")?.classList.add("overlay");
       document.querySelector(".section2")?.classList.add("overlay");
     }
     inputRef.current && inputRef.current.focus();
-    setDbPercent(Math.floor((e / rows) * 100));
+    setDbPercent(percentage);
   }, []);
 
   const downloadDb = useCallback(async () => {
@@ -133,7 +135,7 @@ function App() {
   };
 
   return (
-    <div className="h-[100dvh] App  overflow-h idden   grid gap-2 grid-rows-[.5fr,auto]">
+    <div className="h-[100dvh] App relative overflow-x-hidden   grid gap-2 grid-rows-[.5fr,auto]">
       <Head />
       <More
         downloadDb={downloadDb}
