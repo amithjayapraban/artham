@@ -135,7 +135,7 @@ function App() {
   };
 
   return (
-    <div className="h-[100dvh] App relative overflow-x-hidden   grid gap-2 grid-rows-[.5fr,auto]">
+    <div onClick={() => { document.querySelector(".more")?.classList.add("hide");}} className="h-[100dvh] App relative overflow-x-hidden   grid gap-2 grid-rows-[.5fr,auto]">
       <Head />
       <More
         downloadDb={downloadDb}
