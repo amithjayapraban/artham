@@ -7,7 +7,7 @@ export default function More({ downloading, dbPercent, downloadDb }: More) {
   let a = new Array(2).fill(0);
 
   return (
-    <div className="more more1 bg-bg h-[100dvh]  border-l border-gray   p-8 pt-16 pr-12 md:pr-44  rounded-tl-sm md:w-[40%] w-[80%]  break-words right-0  absolute z-[99]">
+    <div className="more flex flex-col pt-8   pb-4 px-4 md:pl-12 pl-6 more1 bg-bg h-[100dvh]  border-l border-gray    rounded-tl-sm md:w-[40%] w-[80%]  break-words right-0  absolute z-[99]">
       <button
         onClick={() => {
           document.querySelector(".more")?.classList.add("hide");
@@ -15,7 +15,7 @@ export default function More({ downloading, dbPercent, downloadDb }: More) {
           document.querySelector(".section2")?.classList.remove("overlay");
           localStorage.setItem("more", "");
         }}
-        className="absolute md:right-[19%] right-[5.5%] top-[2.2%] md:top-[4.4%] text-white flex items-center justify-center  aspect-square rounded-full   w-10 "
+        className="self-end  text-white flex items-center justify-center  aspect-square rounded-md   w-10 "
       >
         <img src="/cross.svg" className="w-4" alt="" />
       </button>
@@ -48,10 +48,10 @@ export default function More({ downloading, dbPercent, downloadDb }: More) {
           </>
         ) : (
           <>
-            <li>
-              Database Downloaded 💾 <br />
+            <li className="">
+              Database Downloaded.
               <br />
-              Now you can search even if you are offline ✨
+              Now you can search even if you are offline. ✨
             </li>
           </>
         )}
@@ -67,6 +67,7 @@ export default function More({ downloading, dbPercent, downloadDb }: More) {
             {/* ⚡ */}
           </a>
         </li>
+        <img src="/logo.svg" className="aspect-square  w-10 " alt="" />
         <li className="mt-1 text-[#757575] text-[.7rem]">
           Database from{" "}
           <a className="text-white" href="https://olam.in/open/">

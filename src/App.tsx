@@ -135,39 +135,42 @@ function App() {
   };
 
   return (
-    <div className="h-[100dvh] App relative overflow-x-hidden items-start  grid gap-2 grid-rows-[.5fr,auto]">
-      <Head />
+    <div className="fixed left-0 right-0 w-full h-[100dvh] overflow-y-hidden   App overflow-x-hidden items-start  grid gap-2 grid-rows-[.1fr,auto]">
+      <span className="relative">
+        <Head />
+      </span>
+
       <More
         downloadDb={downloadDb}
         downloading={downloading}
         dbPercent={dbPercent}
       />
 
-      <section className=" w-full px-4 md:px-24 self-end section2  grid gap-2  grid-rows-[.1fr,.1fr,1fr] md:grid-rows-[.1fr,1fr,.1fr]  ">
-        <span className="md:hidden relative flex w-full justify-center">
+      <section className=" w-full h-full  md:pb-8  pb-4 px-4 md:px-24 md:self-start   section2  grid gap-2  grid-rows-[5vh,5vh,auto] md:grid-rows-[.1fr,1fr,.1fr]  ">
+        <span className="md:hidden relative  flex w-full justify-center">
           <input
             ref={inputRef}
-            className="px-6  pr-12 md:hidden md:justify-self-center justify-self-start  py-3  w-full md:w-[60%] rounded-md"
+            className="px-6 h-12  md:h-auto pr-12 md:hidden md:justify-self-center justify-self-start  py-3  w-full md:w-[60%] rounded-md"
             type="text"
             value={searchTerm}
             onChange={handleInputChange}
             placeholder="Search..."
           />
           <img
-            className="absolute w-5 right-[6%] top-[.8rem]"
+            className="absolute w-5 right-[7.5%] top-[.85rem]"
             src="/search.svg"
             alt="search"
           />
         </span>
         <h3
-          className={`md:justify-self-center self-center mt-4 w-full md:w-[60%]   ${
+          className={`md:justify-self-center self-center mt-4 w-full   md:w-[60%]   ${
             searchResults.length > 0 ? "opacity-1" : "opacity-0"
           }`}
         >
           Search Results
         </h3>
         {/* md:max-h-[68vh] h-[68dvh] */}
-        <ul className="w-full  md:max-h-[68vh] h-[68dvh]    flex flex-col gap-3 items-center overflow-y-auto ">
+        <ul className="w-full   md:px-0  max-h-[65vh]  md:pb-4 md:bottom-0  flex flex-col gap-3 items-center overflow-y-auto ">
           {searchResults.map((result, i) => (
             <li
               onClick={() => speak(result.english_word)}
@@ -179,10 +182,10 @@ function App() {
             </li>
           ))}
         </ul>
-        <span className="relative md:flex hidden w-full justify-center">
+        <span className="relative md:flex hidden w-full  justify-center">
           <input
             ref={inputRef}
-            className="px-6 pr-12 mb-8  w-full md:w-[60%]  md:justify-self-center justify-self-start  py-3   rounded-md"
+            className="px-6 pr-12   w-full md:w-[60%]  md:justify-self-center justify-self-start  py-3   rounded-md"
             type="text"
             value={searchTerm}
             onChange={handleInputChange}
