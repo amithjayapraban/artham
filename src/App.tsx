@@ -171,14 +171,14 @@ function App() {
           />
           {searchTerm == "" ? (
             <img
-              className="absolute w-5 right-[5%] top-[35%]"
+              className="absolute w-5 right-[5%] top-[33%]"
               src="/search.svg"
               alt="search"
             />
           ) : (
             <img
               onClick={() => setSearchTerm("")}
-              className="absolute  cursor-pointer w-5 right-[5%] top-[35%]"
+              className="absolute  cursor-pointer w-5 right-[5%] top-[33%]"
               src="/clear.svg"
               alt="search"
             />
