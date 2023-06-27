@@ -4,18 +4,17 @@ type More = {
   downloadDb: Function;
 };
 export default function More({ downloading, dbPercent, downloadDb }: More) {
-  let a = new Array(2).fill(0);
-
   return (
     <div className="more flex flex-col pt-8   pb-4 px-4 md:pl-12 pl-6 more1 bg-bg h-[100dvh]  border-l border-gray    rounded-tl-sm md:w-[40%] w-[80%]  break-words right-0  absolute z-[99]">
       <button
+        disabled
         onClick={() => {
           document.querySelector(".more")?.classList.add("hide");
           document.querySelector(".section1")?.classList.remove("overlay");
           document.querySelector(".section2")?.classList.remove("overlay");
           localStorage.setItem("more", "");
         }}
-        className="self-end  text-white flex items-center justify-center  aspect-square rounded-md   w-10 "
+        className="self-end opacity-0  text-white flex items-center justify-center  aspect-square rounded-md   w-10 "
       >
         <img src="/cross.svg" className="w-4" alt="" />
       </button>
