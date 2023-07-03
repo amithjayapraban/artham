@@ -69,7 +69,7 @@ An offline English Malayalam Dictionary. <br/> Uses IndexedDB.
 
 1. Clone the repo
    ```sh
-   git clone https://github.com/amithjayapraban/p2p.git
+   git clone https://github.com/amithjayapraban/artham.git
    ```
 1. Install NPM packages
    ```sh
