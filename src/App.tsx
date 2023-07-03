@@ -1,4 +1,10 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from "react";
 import { db } from "./db";
 import { SearchResult } from "./types/SearchResult";
 import { supabase } from "./supbase";
@@ -35,6 +41,18 @@ function App() {
     let percentage = Math.floor((e / rows) * 100);
     percentage !== 100 && downloadDb();
     synth = window.speechSynthesis;
+    // let more = localStorage.getItem("more");
+    // more != null && document.querySelector(".more")?.classList.add("hide");
+    // if (more === null) {
+    //   document.querySelector(".section1")?.classList.add("overlay");
+    //   document.querySelector(".section2")?.classList.add("overlay");
+    //   setMoreShown(true);
+    // }
+    inputRef.current && inputRef.current.focus();
+    setDbPercent(percentage);
+  }, []);
+
+  useLayoutEffect(() => {
     let more = localStorage.getItem("more");
     more != null && document.querySelector(".more")?.classList.add("hide");
     if (more === null) {
@@ -42,8 +60,6 @@ function App() {
       document.querySelector(".section2")?.classList.add("overlay");
       setMoreShown(true);
     }
-    inputRef.current && inputRef.current.focus();
-    setDbPercent(percentage);
   }, []);
 
   const downloadDb = useCallback(async () => {
@@ -73,7 +89,7 @@ function App() {
             console.log("error");
           }
           i == e - s && e < rows && downloadDb();
-          i == e - s && console.count("api called");
+          // i == e - s && console.count("Api called");
         }
       );
     }
@@ -110,7 +126,7 @@ function App() {
     if (term.length > 0) {
       try {
         db.dictionary.count().then((c) => {
-          c > 215000 ? fetchFromStore(term) : fetchFromApi(term);
+          c > 215000 ? fetchFromStore(term.trim()) : fetchFromApi(term.trim());
         });
       } catch {}
     } else {
@@ -163,7 +179,7 @@ function App() {
         <span className="md:hidden relative  flex w-full justify-center">
           <input
             ref={inputRef}
-            className="px-6 h-full md:h-auto pr-12 md:hidden md:justify-self-center justify-self-start  py-3  w-full md:w-[60%] rounded-md"
+            className="px-6 h-16 md:h-auto pr-12 md:hidden md:justify-self-center justify-self-start  py-3  w-full md:w-[60%] rounded-md"
             type="text"
             value={searchTerm}
             onChange={handleInputChange}
@@ -177,7 +193,10 @@ function App() {
             />
           ) : (
             <img
-              onClick={() => setSearchTerm("")}
+              onClick={() => {
+                setSearchTerm("");
+                setSearchResults([]);
+              }}
               className="absolute  cursor-pointer w-5 right-[5%] top-[33%]"
               src="/clear.svg"
               alt="search"
@@ -215,14 +234,17 @@ function App() {
           />
           {searchTerm == "" ? (
             <img
-              className="absolute  w-5 right-[22%] top-[31%]"
+              className="absolute  w-5 right-[22%] top-[27.5%]"
               src="/search.svg"
               alt="search"
             />
           ) : (
             <img
-              onClick={() => setSearchTerm("")}
-              className="absolute cursor-pointer w-5 right-[22%] top-[31%]"
+              onClick={() => {
+                setSearchTerm("");
+                setSearchResults([]);
+              }}
+              className="absolute cursor-pointer w-5 right-[22%] top-[27.5%]"
               src="/clear.svg"
               alt="clear"
             />
