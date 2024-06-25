@@ -100,7 +100,7 @@ function App() {
     db.dictionary
       .where("english_word")
       .startsWithAnyOfIgnoreCase(term)
-      // .limit(15)
+      .limit(50)
       .toArray()
       .then((val: any) => {
         setSearchResults(val ?? []);
@@ -114,7 +114,7 @@ function App() {
       .from("dictionary")
       .select()
       .ilike("english_word", `${term}%`)
-      .limit(15);
+      .limit(50);
     if (error) {
       console.error("Error searching data from API", error);
     } else {
