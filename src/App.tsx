@@ -96,11 +96,11 @@ function App() {
   }, []);
 
   const fetchFromStore = (term: string) => {
-    console.log(" 🔍 Searching local DB...");
+    console.log(" 🔍 Searching local database");
     db.dictionary
       .where("english_word")
       .startsWithAnyOfIgnoreCase(term)
-      .limit(15)
+      // .limit(15)
       .toArray()
       .then((val: any) => {
         setSearchResults(val ?? []);
@@ -109,14 +109,14 @@ function App() {
   };
 
   const fetchFromApi = async (term: string) => {
-    console.log(" 🔍 Searching DB...");
+    console.log(" 🔍 Searching database");
     const { data, error } = await supabase
       .from("dictionary")
       .select()
       .ilike("english_word", `${term}%`)
       .limit(15);
     if (error) {
-      console.error("Error searching data:", error);
+      console.error("Error searching data from API", error);
     } else {
       setSearchResults(data ?? []);
     }
@@ -144,7 +144,7 @@ function App() {
     };
   }, []);
 
-  const delayedSearch = debounce(Search, 500);
+  const delayedSearch = debounce(Search,500);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const term = e.target.value;
@@ -163,7 +163,7 @@ function App() {
           localStorage.setItem("more", "");
         }
       }}
-      className="fixed left-0 right-0 w-full h-[100dvh] overflow-y-hidden   App overflow-x-hidden items-start  grid gap-2 grid-rows-[.1fr,auto]"
+      className="fixed left-0 right-0 w-full h-[100dvh] overflow-hidden    App  items-start  grid gap-2 grid-rows-[.1fr,auto]"
     >
       <span className="relative">
         <Head moreShown={moreShown} setMoreShown={setMoreShown} />
@@ -211,12 +211,12 @@ function App() {
           Search Results
         </h3>
         {/* md:max-h-[68vh] h-[68dvh] */}
-        <ul className="w-full   md:px-0  h-[65vh]  md:pb-4 md:bottom-0  flex flex-col gap-3 items-center overflow-y-auto ">
+        <ul className="w-full   md:px-0  h-[70dvh] md:pb-4 md:bottom-0  flex flex-col gap-3 items-center overflow-y-auto ">
           {searchResults.map((result, i) => (
             <li
               onClick={() => speak(result.english_word)}
               className=" cursor-pointer bg-gray w-full md:w-[60%]   py-2 px-4 rounded-md"
-              key={i}
+              key={result.id}
             >
               <p className="text-[.9rem]  opacity-80"> {result.english_word}</p>
               <i className="pl-1">{result.malayalam_definition}</i>
@@ -234,7 +234,7 @@ function App() {
           />
           {searchTerm == "" ? (
             <img
-              className="absolute  w-5 right-[22%] top-[27.5%]"
+              className="absolute  w-5 right-[22%] top-[29.5%]"
               src="/search.svg"
               alt="search"
             />
@@ -244,7 +244,7 @@ function App() {
                 setSearchTerm("");
                 setSearchResults([]);
               }}
-              className="absolute cursor-pointer w-5 right-[22%] top-[27.5%]"
+              className="absolute cursor-pointer w-5 right-[22%] top-[29.5%]"
               src="/clear.svg"
               alt="clear"
             />
