@@ -126,7 +126,7 @@ function App() {
     if (term.length > 0) {
       try {
         db.dictionary.count().then((c) => {
-          c > 215000 ? fetchFromStore(term.trim()) : fetchFromApi(term.trim());
+          c > 210000 ? fetchFromStore(term.trim()) : fetchFromApi(term.trim());
         });
       } catch {}
     } else {
@@ -144,7 +144,7 @@ function App() {
     };
   }, []);
 
-  const delayedSearch = debounce(Search,500);
+  const delayedSearch = debounce(Search, 300);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const term = e.target.value;
@@ -216,7 +216,7 @@ function App() {
             <li
               onClick={() => speak(result.english_word)}
               className=" cursor-pointer bg-gray w-full md:w-[60%]   py-2 px-4 rounded-md"
-              key={result.id}
+              key={i}
             >
               <p className="text-[.9rem]  opacity-80"> {result.english_word}</p>
               <i className="pl-1">{result.malayalam_definition}</i>
